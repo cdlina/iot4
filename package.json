@@ -1,0 +1,16 @@
+{
+    "name": "iot1",
+    "version": "1.0.0",
+    "description": "IoT project with DHT11 sensor and LED control",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "ws": "^8.13.0"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+  
