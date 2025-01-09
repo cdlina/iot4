@@ -20,7 +20,7 @@ wss.on('connection', (ws) => {
     // 주기적으로 DHT11 센서 데이터 읽기
     const interval = setInterval(() => {
         console.log('Reading DHT11 data...');
-        exec('/home/admin/myenv/bin/python3 /home/admin/iot3/scripts/read_dht11.py', (err, stdout, stderr) => {
+        exec('/home/pi/myenv/bin/python3 /home/pi/iot4/scripts/read_dht11.py', (err, stdout, stderr) => {
             if (err) {
                 console.error(`Error reading DHT11 data: ${err}`);
                 return;
@@ -39,7 +39,7 @@ wss.on('connection', (ws) => {
                 // 자동 모드에서 보일러 및 환풍기 제어
                 if (temperature < minTemp) {
                     console.log(`Temperature ${temperature}°C below ${minTemp}°C. Turning Boiler ON...`);
-                    exec('/home/admin/myenv/bin/python3 /home/admin/iot3/scripts/ledon.py', (err, stdout, stderr) => {
+                    exec('/home/pi/myenv/bin/python3 /home/pi/iot4/scripts/ledon.py', (err, stdout, stderr) => {
                         if (err) {
                             console.error(`Error controlling boiler: ${err}`);
                         } else {
@@ -48,7 +48,7 @@ wss.on('connection', (ws) => {
                     });
                 } else if (temperature >= minTemp) {
                     console.log(`Temperature ${temperature}°C above ${minTemp}°C. Turning Boiler OFF...`);
-                    exec('/home/admin/myenv/bin/python3 /home/admin/iot3/scripts/ledoff.py', (err, stdout, stderr) => {
+                    exec('/home/pi/myenv/bin/python3 /home/pi/iot4/scripts/ledoff.py', (err, stdout, stderr) => {
                         if (err) {
                             console.error(`Error controlling boiler: ${err}`);
                         } else {
@@ -60,7 +60,7 @@ wss.on('connection', (ws) => {
                 // 환풍기 제어
                 if (temperature > maxTemp) {
                     console.log(`Temperature ${temperature}°C above ${maxTemp}°C. Turning FAN ON...`);
-                    exec('/home/admin/myenv/bin/python3 /home/admin/iot3/scripts/fanon.py', (err, stdout, stderr) => {
+                    exec('/home/pi/myenv/bin/python3 /home/pi/iot4/scripts/fanon.py', (err, stdout, stderr) => {
                         if (err) {
                             console.error(`Error controlling FAN: ${err}`);
                         } else {
@@ -69,7 +69,7 @@ wss.on('connection', (ws) => {
                     });
                 } else if (temperature <= maxTemp) {
                     console.log(`Temperature ${temperature}°C below ${maxTemp}°C. Turning FAN OFF...`);
-                    exec('/home/admin/myenv/bin/python3 /home/admin/iot3/scripts/fanoff.py', (err, stdout, stderr) => {
+                    exec('/home/pi/myenv/bin/python3 /home/pi/iot4/scripts/fanoff.py', (err, stdout, stderr) => {
                         if (err) {
                             console.error(`Error controlling FAN: ${err}`);
                         } else {
